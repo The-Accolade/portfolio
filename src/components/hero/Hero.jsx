@@ -23,22 +23,23 @@ const Hero = () => {
     }, []);
 
   return (
-    <section>
-        <div className='hero-content'>
-            <h3>Hello, I am</h3>
-            <h1>Akolade Olusola</h1>
+    <section id='hero'>
+        <div className='hero-content' >
+            <h1>Hi, I'm <span>Akolade Olusola</span></h1>
             <h3>And I am a <span className='multiple-text' ref={multipleText}></span></h3>
             <p>Html & CSS, Tailwind, Vanilla Javascript, Jquery, ReactJs, Redux, React Hooks, React Lifecycle, VueJs 2 & 3, Vuex, Node Js, Express Js, MongoDB </p>
-            {/*<p>Graduate of English Education turned Software Engineer with about three years experience in building functional responsive web
-            applications and Restful APIs utilizing HTML5, CSS3-SCSS, Javascript, ReactJs and VueJs. Values simplicity and readability in coding.
-  He also prides himself proficient in other roles such as technical support and content writing.</p>*/}
+             
+            <div className='btn-box'>
+              <a href='https://' style={{'--i': 11}} className='btn'>Hire Me</a>
+              <a href='https://' style={{'--i': 12}} className='btn'>Let's Talk</a>
+            </div>
+
             <div className='social-media'>
                 <a style={{'--i': 7}} href='https://www.facebook.com/koladeko/'><i class='bx bxl-facebook'></i></a>
                 <a style={{'--i': 8}} href='https://twitter.com/AkoladeOlusola'><i class='bx bxl-twitter'></i></a>
                 <a style={{'--i': 9}} href='https://www.linkedin.com/in/akolade-olusola/'><i class='bx bxl-linkedin'></i></a>
                 <a style={{'--i': 10}} href='https://www.instagram.com/akolade_olusola/'><i class='bx bxl-instagram-alt'></i></a>
             </div>
-            <a href='https://' className='btn'>Download Resume</a>
         </div>
         <div className='hero-img'>
             <img src={HeroImage} alt="Akolade" />
