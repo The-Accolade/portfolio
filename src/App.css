@@ -246,3 +246,8 @@ header.sticky {
     display: block;
   }
 }
+@media (max-width: 520px) {
+  html {
+    font-size: 50%;
+  }
+}

@@ -170,3 +170,9 @@ p {
 .btn:hover::before {
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .btn {
+        font-size: 1.4rem;
+    }
+}

@@ -47,11 +47,11 @@ const Header = () => {
         <nav className={`navbar ${isClicked ? 'nav-active' : ''}`}>
             <div className='navbar__links'>
                 <div className='navbar__links-container'>
-                <p><a className='active' style={{'--i': 1}} href='#hero'>Home</a></p>
-                <p><a style={{'--i': 2}} href='#about'>About</a></p>
-                <p><a style={{'--i': 3}} href='#education'>Education</a></p>
-                <p><a style={{'--i': 4}} href='#skills'>Skills</a></p>
-                <p><a style={{'--i': 5}} href='#contact'>Contact</a></p>
+                <p><a className='active' onClick={() => setIsClicked(false)} style={{'--i': 1}} href='#hero'>Home</a></p>
+                <p><a style={{'--i': 2}} onClick={() => setIsClicked(false)}  href='#about'>About</a></p>
+                <p><a style={{'--i': 3}} onClick={() => setIsClicked(false)}  href='#education'>Education</a></p>
+                <p><a style={{'--i': 4}} onClick={() => setIsClicked(false)}  href='#skills'>Skills</a></p>
+                <p><a style={{'--i': 5}} onClick={() => setIsClicked(false)}  href='#contact'>Contact</a></p>
                 </div>
               </div>
               <span className="active-nav"></span>

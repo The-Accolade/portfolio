@@ -27,7 +27,7 @@ const Hero = () => {
         <div className='hero-content' >
             <h1>Hi, I'm <span>Akolade Olusola</span></h1>
             <h3>And I am a <span className='multiple-text' ref={multipleText}></span></h3>
-            <p>Html & CSS, Tailwind, Vanilla Javascript, Jquery, ReactJs, Redux, React Hooks, React Lifecycle, VueJs 2 & 3, Vuex, Node Js, Express Js, MongoDB </p>
+            <p>Html & CSS, Tailwind, Vanilla Javascript, Jquery, ReactJs, NextJs, Redux, React Hooks, React Lifecycle, VueJs 2 & 3, Vuex, Node Js, Express Js, MongoDB </p>
              
             <div className='btn-box'>
               <a href='https://' style={{'--i': 11}} className='btn'>Hire Me</a>

@@ -18,9 +18,9 @@ const About = () => {
   He also prides himself proficient in other roles such as technical support and content writing.</p>
           </div>
 
-          <div className="btn-box btns">
-              <a href="#" className="btn">Read More</a>
-          </div>
+      {/*<div className="btn-box btns">
+        <a href="#" className="btn">Read More</a>
+  </div>*/}
     </section>
   )
 }
