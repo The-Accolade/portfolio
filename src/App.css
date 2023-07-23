@@ -211,6 +211,12 @@ header.sticky {
   }
 }
 
+@keyframes aboutSpinner {
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 /* BREAKPOINTS */
 @media (max-width: 1200px) {
   html {
@@ -258,3 +264,13 @@ header.sticky {
   }
 }
 
+@media (max-width: 462px) {
+  .footer {
+    flex-direction: column-reverse;
+  }
+
+  .footer p {
+    margin-top: 2rem;
+    text-align: center;
+  }
+}

@@ -73,3 +73,9 @@ form .textarea-field textarea {
 form .btn-box.btns .btn {
    cursor: pointer; 
 }
+
+@media (max-width: 462px) {
+    .contact form .input-box .input-field {
+        width: 100%;
+    }
+}

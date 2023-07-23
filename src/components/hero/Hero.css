@@ -21,7 +21,7 @@ section {
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 3rem;
     line-height: 1.3;
     font-weight: 300;
     margin: -3px 0;
@@ -33,22 +33,26 @@ h1 {
 h1 span {
     font-family: var(--sec-font-family);
     font-weight: 700;
+    font-size: 3rem;
+    /* display: block; */
+    text-transform: uppercase;
 }
 
 h3 {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 600;
     opacity: 0;
     animation: slideBottom 1s ease forwards;
     animation-delay: .7s;
+    margin-top: 5px;
 }
 
 h3 span {
-    color: var(--main-color);
+    color: #ffffff;
     position: relative;
     width: 32.8rem;
-    font-size: 3.2rem;
-    -webkit-text-stroke: .7 var(--main-color);
+    font-size: 2.4rem;
+    -webkit-text-stroke: .7 #ffffff;
 }
 
 h3:nth-of-type(2) {
@@ -175,10 +179,32 @@ p {
     .btn {
         font-size: 1.4rem;
     }
+    section {
+        padding: 10rem 4% 2rem;
+    }
+    .hero-img img {
+        max-width: 350px;
+    }
 }
 
 @media (max-width: 520px) {
     .hero-img img {
         display: none;
+    }
+}
+@media (max-width: 371px) {
+    .home {
+        justify-content: center;
+    }
+
+    .home-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-content h1 {
+        font-size: 5rem;
     }
 }
