@@ -13,7 +13,7 @@ section {
 }
 
 .hero-img img {
-    max-width: 450px;
+    max-width: 400px;
     height: auto;
     opacity: 0;
     animation: zoomIn 1s ease forwards, floatImage 4s ease-in-out infinite;
@@ -174,5 +174,11 @@ p {
 @media (max-width: 768px) {
     .btn {
         font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .hero-img img {
+        display: none;
     }
 }

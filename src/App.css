@@ -225,6 +225,7 @@ header.sticky {
 
   section {
     padding: 10rem 4% 2rem;
+    width: 100%;
   }
 
   .hero {
@@ -250,4 +251,10 @@ header.sticky {
   html {
     font-size: 50%;
   }
+
+  .home-content h1 {
+    display: flex;
+    flex-direction: column;
+  }
 }
+

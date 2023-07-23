@@ -73,3 +73,9 @@ span {
 .btn-box.btns a::before {
     background: var(--secondary-bg-color);
 }
+
+@media (max-width: 768px) {
+    .about {
+        /* width: 100%; */
+    }
+}
