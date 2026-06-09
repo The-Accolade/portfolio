@@ -3,9 +3,16 @@
   "name": "Akolade Olusola — Senior Frontend Engineer",
   "icons": [
     {
-      "src": "Akolade.svg",
+      "src": "favicon.svg",
       "type": "image/svg+xml",
-      "sizes": "any"
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "180x180",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
