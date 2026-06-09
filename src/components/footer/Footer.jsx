@@ -1,16 +1,18 @@
-import React from 'react'
+import { HiArrowUp } from 'react-icons/hi';
 
 const Footer = () => {
-  return (
-      <footer className='footer'>
-          <div className="footer-text">
-            <p>Copyright &copy; 2023 | Inspired by Codehal | All Rights Reserved.</p>
-          </div>          
-          <div className="iconTop">
-            <a href="#hero"><i class='bx bx-up-arrow-alt'></i></a>
-          </div> 
-      </footer>
-  )
-}
+  const year = new Date().getFullYear();
 
-export default Footer
+  return (
+    <footer className="site-footer">
+      <p className="site-footer__text">
+        &copy; {year} Akolade Olusola. All rights reserved.
+      </p>
+      <a href="#hero" className="site-footer__top" aria-label="Back to top">
+        <HiArrowUp aria-hidden="true" />
+      </a>
+    </footer>
+  );
+};
+
+export default Footer;

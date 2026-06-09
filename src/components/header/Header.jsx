@@ -1,63 +1,105 @@
-import React, { useState, useEffect } from 'react'
-import './Header.css'
+import { useEffect, useState } from 'react';
+import { HiMenu, HiX, HiMoon, HiSun } from 'react-icons/hi';
+import { useScrollSpy } from '../../hooks/useScrollSpy';
+import { useTheme } from '../../hooks/useTheme';
+import './Header.css';
+
+const NAV_LINKS = [
+  { id: 'hero', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' },
+];
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
-  const [isClicked, setIsClicked] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const activeId = useScrollSpy(NAV_LINKS.map((l) => l.id));
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    
-    let sections = document.querySelectorAll('section');
-    let navlinks = document.querySelectorAll('header nav a');
-
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 100);
-      sections.forEach(sec => {
-        const top = window.scrollY;
-        const offset = sec.offsetTop - 100;
-        const height = sec.offsetHeight;
-        const id = sec.getAttribute('id');
-
-        if (top >= offset && top < offset + height) {
-          navlinks.forEach(links => {
-            links.classList.remove('active');
-            document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
-          });
-        };
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-
+    const onScroll = () => setIsSticky(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleClass = () => {
-    setIsClicked(!isClicked);
-    }
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
-    
+  const closeMenu = () => setMenuOpen(false);
+
+  const navLinks = (
+    <ul className="site-header__links">
+      {NAV_LINKS.map(({ id, label }) => (
+        <li key={id}>
+          <a
+            href={`#${id}`}
+            className={activeId === id ? 'active' : ''}
+            onClick={closeMenu}
+            aria-current={activeId === id ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
-      <header className={isSticky ? 'sticky' : ''}>
-        <div className='logo'>Akolade.</div>
-        <div onClick={toggleClass} className={isClicked ? 'bx bx-x' : 'bx bx-menu'} id='menu-icon'></div>
-        <nav className={`navbar ${isClicked ? 'nav-active' : ''}`}>
-            <div className='navbar__links'>
-                <div className='navbar__links-container'>
-                <p><a className='active' onClick={() => setIsClicked(false)} style={{'--i': 1}} href='#hero'>Home</a></p>
-                <p><a style={{'--i': 2}} onClick={() => setIsClicked(false)}  href='#about'>About</a></p>
-                <p><a style={{'--i': 3}} onClick={() => setIsClicked(false)}  href='#education'>Education</a></p>
-                <p><a style={{'--i': 4}} onClick={() => setIsClicked(false)}  href='#skills'>Skills</a></p>
-                <p><a style={{'--i': 5}} onClick={() => setIsClicked(false)}  href='#contact'>Contact</a></p>
-                </div>
-              </div>
-              <span className="active-nav"></span>
-        </nav>
-      </header>
-  )
-}
+    <>
+      <header
+        className={[
+          'site-header',
+          isSticky && 'site-header--sticky',
+          menuOpen && 'site-header--menu-open',
+        ].filter(Boolean).join(' ')}
+      >
+        <a href="#hero" className="site-header__logo" aria-label="Akolade Olusola — Home">
+          Akolade<span>.</span>
+        </a>
 
-export default Header
+        <nav className="site-header__nav site-header__nav--desktop" aria-label="Primary">
+          {navLinks}
+        </nav>
+
+        <div className="site-header__actions">
+          <button
+            type="button"
+            className="site-header__theme"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? <HiSun /> : <HiMoon />}
+          </button>
+
+          <button
+            type="button"
+            className="site-header__menu-btn"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {menuOpen ? <HiX /> : <HiMenu />}
+          </button>
+        </div>
+      </header>
+
+      <div
+        className={`mobile-nav ${menuOpen ? 'mobile-nav--open' : ''}`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="mobile-nav__backdrop" onClick={closeMenu} aria-hidden="true" />
+        <nav id="mobile-nav" className="mobile-nav__panel" aria-label="Primary mobile">
+          {navLinks}
+        </nav>
+      </div>
+    </>
+  );
+};
+
+export default Header;
