@@ -25,7 +25,7 @@ Deploy via [Netlify](https://app.netlify.com/teams/the-accolade/projects) (team:
 - **Accessible** — semantic HTML, skip link, ARIA labels, form labels, reduced-motion support
 - **Responsive navigation** — desktop nav + full-screen mobile overlay
 - **Scroll spy** — active section highlighting via Intersection Observer
-- **Curated projects** — live client work with GitHub links where available
+- **Curated projects** — live client work with direct site links
 - **Centralized content** — profile data in one file for easy updates
 
 ## Sections
@@ -107,7 +107,6 @@ Edit `src/data/projects.js` to add or update featured work:
 
 - `name`, `description`, `topics`
 - `liveUrl` — production site URL
-- `githubUrl` — source repo (optional; omit for private or client-only work)
 
 ### Theme & styles
 
