@@ -6,10 +6,8 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "prebuild": "node scripts/fetch-projects.mjs",
     "build": "vite build",
-    "preview": "vite preview",
-    "fetch-projects": "node scripts/fetch-projects.mjs"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.1.0",

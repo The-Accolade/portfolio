@@ -1,12 +1,9 @@
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-import { SiNetlify } from 'react-icons/si';
-import { PROJECTS, PROJECTS_META } from '../../data/projects.generated';
+import { PROJECTS, PROJECTS_META } from '../../data/projects';
 import { Reveal } from '../Reveal';
 import './Projects.css';
 
 const Projects = () => {
-  const withLive = PROJECTS.filter((p) => p.liveUrl);
-
   return (
     <section id="projects" className="projects" aria-labelledby="projects-heading">
       <Reveal>
@@ -14,13 +11,13 @@ const Projects = () => {
           Featured <span>Projects</span>
         </h2>
         <p className="projects__intro">
-          Pulled from my{' '}
-          <a href={`https://github.com/${PROJECTS_META.githubUser}`} target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>{' '}
-          repos, with live demos hosted on{' '}
+          Selected client and personal work — live sites deployed on custom domains and{' '}
           <a href={PROJECTS_META.netlifyTeamUrl} target="_blank" rel="noopener noreferrer">
             Netlify
+          </a>
+          . More code on{' '}
+          <a href={PROJECTS_META.githubUrl} target="_blank" rel="noopener noreferrer">
+            GitHub
           </a>
           .
         </p>
@@ -32,48 +29,38 @@ const Projects = () => {
             <article className="project-card__inner">
               <div className="project-card__header">
                 <h3>{project.name}</h3>
-                {project.liveUrl && (
-                  <span className="project-card__badge">Live</span>
-                )}
+                <span className="project-card__badge">Live</span>
               </div>
 
               <p className="project-card__desc">{project.description}</p>
 
               <ul className="project-card__tags" aria-label={`Technologies used in ${project.name}`}>
-                {[project.language, ...project.topics.filter((t) => t !== project.language)]
-                  .filter(Boolean)
-                  .slice(0, 4)
-                  .map((tag) => (
-                    <li key={tag}>{tag}</li>
-                  ))}
+                {project.topics.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
               </ul>
 
               <div className="project-card__links">
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-card__link"
-                >
-                  <FaGithub aria-hidden="true" />
-                  Code
-                </a>
-                {project.liveUrl ? (
+                {project.githubUrl && (
                   <a
-                    href={project.liveUrl}
+                    href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="project-card__link project-card__link--live"
+                    className="project-card__link"
                   >
-                    <FaExternalLinkAlt aria-hidden="true" />
-                    Live Demo
+                    <FaGithub aria-hidden="true" />
+                    Code
                   </a>
-                ) : (
-                  <span className="project-card__link project-card__link--disabled">
-                    <SiNetlify aria-hidden="true" />
-                    Not deployed
-                  </span>
                 )}
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-card__link project-card__link--live"
+                >
+                  <FaExternalLinkAlt aria-hidden="true" />
+                  Live Site
+                </a>
               </div>
             </article>
           </Reveal>
@@ -82,11 +69,9 @@ const Projects = () => {
 
       <Reveal delay={200}>
         <div className="projects__footer">
-          <p>
-            {withLive.length} live demos · {PROJECTS.length} featured repos · Updated {PROJECTS_META.fetchedAt}
-          </p>
+          <p>{PROJECTS.length} featured projects · all with live demos</p>
           <a
-            href={`https://github.com/${PROJECTS_META.githubUser}?tab=repositories`}
+            href={`${PROJECTS_META.githubUrl}?tab=repositories`}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn--ghost"

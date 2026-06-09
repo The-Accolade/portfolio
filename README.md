@@ -2,11 +2,21 @@
 
 Personal portfolio site for **Akolade Olusola**, Senior Frontend Engineer and Technical Educator based in Lagos, Nigeria.
 
-Built with React 19 and Vite, featuring a responsive layout, dark/light theme, scroll-reveal animations, and a projects section synced from GitHub and Netlify.
+Built with React 19 and Vite, featuring a responsive layout, dark/light theme, scroll-reveal animations, and a curated projects section with live client work.
 
 ## Live Demo
 
 Deploy via [Netlify](https://app.netlify.com/teams/the-accolade/projects) (team: `the-accolade`).
+
+## Featured Projects
+
+| Project | Live Site |
+| ------- | --------- |
+| The Proxy Academy | [theproxyacademy.com](https://theproxyacademy.com/) |
+| FocusFlow | [tpa-foc.netlify.app](https://tpa-foc.netlify.app/) |
+| Caribbean School of Health Technology | [csht.edu.ng](https://csht.edu.ng/) |
+| Empowered Eve | [empoweredeve.org](https://empoweredeve.org/) |
+| Natours | [natoursnavigate.netlify.app](https://natoursnavigate.netlify.app/) |
 
 ## Features
 
@@ -15,7 +25,7 @@ Deploy via [Netlify](https://app.netlify.com/teams/the-accolade/projects) (team:
 - **Accessible** — semantic HTML, skip link, ARIA labels, form labels, reduced-motion support
 - **Responsive navigation** — desktop nav + full-screen mobile overlay
 - **Scroll spy** — active section highlighting via Intersection Observer
-- **Projects auto-sync** — fetches repos from [The-Accolade](https://github.com/The-Accolade) and probes live Netlify demos before each build
+- **Curated projects** — live client work with GitHub links where available
 - **Centralized content** — profile data in one file for easy updates
 
 ## Sections
@@ -25,7 +35,7 @@ Deploy via [Netlify](https://app.netlify.com/teams/the-accolade/projects) (team:
 | Hero       | Intro, typewriter roles, CTA, social links               |
 | About      | Career summary, education, stats, key achievements       |
 | Experience | Engineering and teaching timelines                     |
-| Projects   | GitHub repos with live Netlify demo links                |
+| Projects   | Featured live client and personal projects              |
 | Skills     | Technical, educational, and soft skills                  |
 | Contact    | Contact info cards and message form                      |
 
@@ -64,7 +74,7 @@ Open [http://localhost:5173](http://localhost:5173).
 pnpm build
 ```
 
-Output is written to `dist/`. The `prebuild` step automatically refreshes project data from GitHub.
+Output is written to `dist/`.
 
 ### Preview production build
 
@@ -74,12 +84,11 @@ pnpm preview
 
 ## Scripts
 
-| Command              | Description                                      |
-| -------------------- | ------------------------------------------------ |
-| `pnpm dev`           | Start Vite dev server                            |
-| `pnpm build`         | Fetch projects + build for production            |
-| `pnpm preview`       | Serve the production build locally               |
-| `pnpm fetch-projects`| Regenerate GitHub/Netlify project data only      |
+| Command        | Description                |
+| -------------- | -------------------------- |
+| `pnpm dev`     | Start Vite dev server      |
+| `pnpm build`   | Build for production       |
+| `pnpm preview` | Serve production locally   |
 
 ## Customization
 
@@ -94,20 +103,11 @@ Edit `src/data/profile.js` to update:
 
 ### Projects
 
-Projects are auto-generated into `src/data/projects.generated.js` by:
+Edit `src/data/projects.js` to add or update featured work:
 
-```bash
-pnpm fetch-projects
-```
-
-The script (`scripts/fetch-projects.mjs`):
-
-1. Fetches public repos from `The-Accolade` on GitHub
-2. Probes matching `{repo-name}.netlify.app` URLs
-3. Filters out tutorial/challenge repos and squatted generic names
-4. Outputs the top 12 featured projects (live demos first)
-
-To change the GitHub user or Netlify team, edit the constants at the top of `scripts/fetch-projects.mjs`.
+- `name`, `description`, `topics`
+- `liveUrl` — production site URL
+- `githubUrl` — source repo (optional; omit for private or client-only work)
 
 ### Theme & styles
 
@@ -125,8 +125,6 @@ Replace assets in `src/assets/images/`:
 ```
 portfolio-master/
 ├── public/                  # Static assets (favicon, manifest)
-├── scripts/
-│   └── fetch-projects.mjs   # GitHub + Netlify project sync
 ├── src/
 │   ├── components/
 │   │   ├── header/          # Nav, theme toggle, mobile menu
@@ -140,7 +138,7 @@ portfolio-master/
 │   │   └── Reveal.jsx       # Scroll-reveal wrapper
 │   ├── data/
 │   │   ├── profile.js       # Editable profile content
-│   │   └── projects.generated.js
+│   │   └── projects.js      # Featured projects with live links
 │   ├── hooks/
 │   │   ├── useTheme.js
 │   │   ├── useScrollSpy.js
