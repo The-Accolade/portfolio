@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi';
 import { PROFILE } from '../../data/profile';
+import { sendContactEmail } from '../../lib/emailjs';
 import { Reveal } from '../Reveal';
 import './Contact.css';
 
@@ -13,12 +14,45 @@ const CONTACT_LINKS = [
   { icon: FaGithub, label: 'GitHub', value: 'View my code', href: PROFILE.github },
 ];
 
-const Contact = () => {
-  const [submitted, setSubmitted] = useState(false);
+const INITIAL_FORM = {
+  name: '',
+  email: '',
+  phone: '',
+  subject: '',
+  message: '',
+};
 
-  const handleSubmit = (e) => {
+const Contact = () => {
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (error) setError('');
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError('');
+
+    try {
+      await sendContactEmail(form);
+      setSubmitted(true);
+      setForm(INITIAL_FORM);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setError(
+        err?.text ||
+          err?.message ||
+          'Something went wrong sending your message. Please try again or email me directly.',
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -59,32 +93,80 @@ const Contact = () => {
             <div className="contact__row">
               <div className="contact__field">
                 <label htmlFor="name">Full Name</label>
-                <input type="text" id="name" name="name" required autoComplete="name" />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  autoComplete="name"
+                  disabled={submitting}
+                />
               </div>
               <div className="contact__field">
                 <label htmlFor="email">Email Address</label>
-                <input type="email" id="email" name="email" required autoComplete="email" />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  autoComplete="email"
+                  disabled={submitting}
+                />
               </div>
             </div>
 
             <div className="contact__row">
               <div className="contact__field">
                 <label htmlFor="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" autoComplete="tel" />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  autoComplete="tel"
+                  disabled={submitting}
+                />
               </div>
               <div className="contact__field">
                 <label htmlFor="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required />
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={form.subject}
+                  onChange={handleChange}
+                  required
+                  disabled={submitting}
+                />
               </div>
             </div>
 
             <div className="contact__field">
               <label htmlFor="message">Your Message</label>
-              <textarea id="message" name="message" rows={6} required />
+              <textarea
+                id="message"
+                name="message"
+                rows={6}
+                value={form.message}
+                onChange={handleChange}
+                required
+                disabled={submitting}
+              />
             </div>
 
-            <button type="submit" className="btn btn--primary contact__submit">
-              Send Message
+            {error && (
+              <p className="contact__error" role="alert">
+                {error}
+              </p>
+            )}
+
+            <button type="submit" className="btn btn--primary contact__submit" disabled={submitting}>
+              {submitting ? 'Sending…' : 'Send Message'}
             </button>
           </form>
         )}
