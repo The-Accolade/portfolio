@@ -1,70 +1,178 @@
-# Getting Started with Create React App
+# Akolade Olusola — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio site for **Akolade Olusola**, Senior Frontend Engineer and Technical Educator based in Lagos, Nigeria.
 
-## Available Scripts
+Built with React 19 and Vite, featuring a responsive layout, dark/light theme, scroll-reveal animations, and a projects section synced from GitHub and Netlify.
 
-In the project directory, you can run:
+## Live Demo
 
-### `npm start`
+Deploy via [Netlify](https://app.netlify.com/teams/the-accolade/projects) (team: `the-accolade`).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Modern stack** — React 19, Vite 6, CSS custom properties
+- **Dark / light mode** — persisted in `localStorage`
+- **Accessible** — semantic HTML, skip link, ARIA labels, form labels, reduced-motion support
+- **Responsive navigation** — desktop nav + full-screen mobile overlay
+- **Scroll spy** — active section highlighting via Intersection Observer
+- **Projects auto-sync** — fetches repos from [The-Accolade](https://github.com/The-Accolade) and probes live Netlify demos before each build
+- **Centralized content** — profile data in one file for easy updates
 
-### `npm test`
+## Sections
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Section    | Description                                              |
+| ---------- | -------------------------------------------------------- |
+| Hero       | Intro, typewriter roles, CTA, social links               |
+| About      | Career summary, education, stats, key achievements       |
+| Experience | Engineering and teaching timelines                     |
+| Projects   | GitHub repos with live Netlify demo links                |
+| Skills     | Technical, educational, and soft skills                  |
+| Contact    | Contact info cards and message form                      |
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [React 19](https://react.dev/)
+- [Vite 6](https://vite.dev/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- CSS Grid & Flexbox (no UI framework)
+- Deployed on [Netlify](https://www.netlify.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+- [Node.js](https://nodejs.org/) 18+
+- [pnpm](https://pnpm.io/) (recommended) or npm
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+pnpm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Development
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+pnpm dev
+```
 
-## Learn More
+Open [http://localhost:5173](http://localhost:5173).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Production build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+pnpm build
+```
 
-### Code Splitting
+Output is written to `dist/`. The `prebuild` step automatically refreshes project data from GitHub.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Preview production build
 
-### Analyzing the Bundle Size
+```bash
+pnpm preview
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Scripts
 
-### Making a Progressive Web App
+| Command              | Description                                      |
+| -------------------- | ------------------------------------------------ |
+| `pnpm dev`           | Start Vite dev server                            |
+| `pnpm build`         | Fetch projects + build for production            |
+| `pnpm preview`       | Serve the production build locally               |
+| `pnpm fetch-projects`| Regenerate GitHub/Netlify project data only      |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Customization
 
-### Advanced Configuration
+### Profile content
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Edit `src/data/profile.js` to update:
 
-### Deployment
+- Name, title, contact details, and social links
+- Career summary and education
+- Experience timelines
+- Skills and achievements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Projects
 
-### `npm run build` fails to minify
+Projects are auto-generated into `src/data/projects.generated.js` by:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+pnpm fetch-projects
+```
+
+The script (`scripts/fetch-projects.mjs`):
+
+1. Fetches public repos from `The-Accolade` on GitHub
+2. Probes matching `{repo-name}.netlify.app` URLs
+3. Filters out tutorial/challenge repos and squatted generic names
+4. Outputs the top 12 featured projects (live demos first)
+
+To change the GitHub user or Netlify team, edit the constants at the top of `scripts/fetch-projects.mjs`.
+
+### Theme & styles
+
+Global design tokens live in `src/App.css` (`:root` and `[data-theme='light']`). Component-specific styles are co-located with each component.
+
+### Images
+
+Replace assets in `src/assets/images/`:
+
+- `Hero-img.png` — hero portrait
+- `about-img.png` — about section photo
+
+## Project Structure
+
+```
+portfolio-master/
+├── public/                  # Static assets (favicon, manifest)
+├── scripts/
+│   └── fetch-projects.mjs   # GitHub + Netlify project sync
+├── src/
+│   ├── components/
+│   │   ├── header/          # Nav, theme toggle, mobile menu
+│   │   ├── hero/
+│   │   ├── about/
+│   │   ├── education/       # Experience timelines
+│   │   ├── projects/
+│   │   ├── skills/
+│   │   ├── contact/
+│   │   ├── footer/
+│   │   └── Reveal.jsx       # Scroll-reveal wrapper
+│   ├── data/
+│   │   ├── profile.js       # Editable profile content
+│   │   └── projects.generated.js
+│   ├── hooks/
+│   │   ├── useTheme.js
+│   │   ├── useScrollSpy.js
+│   │   └── useTypewriter.js
+│   ├── App.jsx
+│   ├── App.css
+│   └── main.jsx
+├── index.html
+├── netlify.toml
+└── vite.config.js
+```
+
+## Deployment
+
+Configured for Netlify in `netlify.toml`:
+
+```toml
+[build]
+  command = "pnpm run build"
+  publish = "dist"
+```
+
+SPA redirects are included so client-side routing works correctly.
+
+## Contact
+
+**Akolade Olusola**  
+Lagos, Nigeria  
+📧 [olusolaakolade@gmail.com](mailto:olusolaakolade@gmail.com)  
+📱 +234 806 809 9457  
+🔗 [LinkedIn](https://www.linkedin.com/in/akolade-olusola/) · [GitHub](https://github.com/The-Accolade)
+
+## License
+
+Private — all rights reserved.
