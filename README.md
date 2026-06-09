@@ -12,6 +12,7 @@ Deploy via [Netlify](https://app.netlify.com/teams/the-accolade/projects) (team:
 
 | Project | Live Site |
 | ------- | --------- |
+| PULSE | [pulse-app-pro.netlify.app](https://pulse-app-pro.netlify.app/) |
 | The Proxy Academy | [theproxyacademy.com](https://theproxyacademy.com/) |
 | FocusFlow | [tpa-foc.netlify.app](https://tpa-foc.netlify.app/) |
 | Caribbean School of Health Technology | [csht.edu.ng](https://csht.edu.ng/) |

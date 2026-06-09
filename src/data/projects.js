@@ -4,6 +4,14 @@ export const PROJECTS_META = {
 
 export const PROJECTS = [
   {
+    slug: 'pulse',
+    name: 'PULSE',
+    description:
+      'A cross-device productivity app with secure sign-in and account sync — built for a seamless experience across web and mobile.',
+    topics: ['React', 'Authentication', 'Cross-Device Sync'],
+    liveUrl: 'https://pulse-app-pro.netlify.app/',
+  },
+  {
     slug: 'the-proxy-academy',
     name: 'The Proxy Academy',
     description:
