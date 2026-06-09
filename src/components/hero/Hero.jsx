@@ -1,6 +1,6 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMail, HiPhone } from 'react-icons/hi';
-import HeroImage from '../../assets/images/Hero-img.png';
+import HeroImage from '../../assets/images/hero-image.png';
 import { PROFILE } from '../../data/profile';
 import { useTypewriter } from '../../hooks/useTypewriter';
 import { Reveal } from '../Reveal';

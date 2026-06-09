@@ -1,4 +1,4 @@
-import AboutImage from '../../assets/images/about-img.png';
+import AboutImage from '../../assets/images/about-img-2.png';
 import { PROFILE } from '../../data/profile';
 import { Reveal } from '../Reveal';
 import './About.css';
